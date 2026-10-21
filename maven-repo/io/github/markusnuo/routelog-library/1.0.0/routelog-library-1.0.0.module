@@ -1,0 +1,138 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.markusnuo",
+    "module": "routelog-library",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.8.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.8.5"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "routelog-library-1.0.0.aar",
+          "url": "routelog-library-1.0.0.aar",
+          "size": 292525,
+          "sha512": "1ee10725f584dcc33d296892e5c0fed47f2f420ff62b0c6381d77a65386a9cf8d0c9ff53e3937e3d451934bdb82020d891ac3e24df79b8ec7b43492b883e8a27",
+          "sha256": "b71d79de16df5d666b03ea1d806bac6b6eb0239ae52bee64ad2d8aa25f262bfb",
+          "sha1": "edc9d9479b7f80286c3dc37e4a75244259228124",
+          "md5": "ee65319e6e85ca9c98023973fc64a773"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.core",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.19.1"
+          }
+        },
+        {
+          "group": "com.squareup.okhttp3",
+          "module": "okhttp",
+          "version": {
+            "requires": "5.5.0"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.8.5"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "routelog-library-1.0.0.aar",
+          "url": "routelog-library-1.0.0.aar",
+          "size": 292525,
+          "sha512": "1ee10725f584dcc33d296892e5c0fed47f2f420ff62b0c6381d77a65386a9cf8d0c9ff53e3937e3d451934bdb82020d891ac3e24df79b8ec7b43492b883e8a27",
+          "sha256": "b71d79de16df5d666b03ea1d806bac6b6eb0239ae52bee64ad2d8aa25f262bfb",
+          "sha1": "edc9d9479b7f80286c3dc37e4a75244259228124",
+          "md5": "ee65319e6e85ca9c98023973fc64a773"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseSourcePublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "routelog-library-1.0.0-sources.jar",
+          "url": "routelog-library-1.0.0-sources.jar",
+          "size": 77015,
+          "sha512": "6bfbef773332982a689e01c1649ba7dbfdf31924ae0b0f41f41814293cf2d1182342f70925a7bdf33e343d052e28e998953d4948998533383d75e7fb545732f0",
+          "sha256": "ce8af9de20a216ad0aa264a88540b676ddda46fed3e59759b01653b344cca2a0",
+          "sha1": "7999a6c7864ae9297da87a33cd51daffa33634b2",
+          "md5": "ece00e30e6674a17d328e714e0b701d8"
+        }
+      ]
+    }
+  ]
+}
