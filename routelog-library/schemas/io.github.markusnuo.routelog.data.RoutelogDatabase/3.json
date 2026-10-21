@@ -1,0 +1,307 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 3,
+    "identityHash": "1939628efddd03af3c918902c6559d7e",
+    "entities": [
+      {
+        "tableName": "recordings",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `started_at_millis` INTEGER NOT NULL, `ended_at_millis` INTEGER, `state` TEXT NOT NULL, `distance_meters` REAL NOT NULL, `point_count` INTEGER NOT NULL, `last_point_at_millis` INTEGER, `segment` INTEGER NOT NULL, `alive_at_millis` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startedAtMillis",
+            "columnName": "started_at_millis",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "endedAtMillis",
+            "columnName": "ended_at_millis",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "distanceMeters",
+            "columnName": "distance_meters",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pointCount",
+            "columnName": "point_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastPointAtMillis",
+            "columnName": "last_point_at_millis",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "segment",
+            "columnName": "segment",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "aliveAtMillis",
+            "columnName": "alive_at_millis",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "track_points",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `recording_id` INTEGER NOT NULL, `segment` INTEGER NOT NULL, `time_millis` INTEGER NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `altitude_meters` REAL, `msl_altitude_meters` REAL, `accuracy_meters` REAL, `speed_mps` REAL, `bearing_degrees` REAL, FOREIGN KEY(`recording_id`) REFERENCES `recordings`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "recordingId",
+            "columnName": "recording_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "segment",
+            "columnName": "segment",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timeMillis",
+            "columnName": "time_millis",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "latitude",
+            "columnName": "latitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "longitude",
+            "columnName": "longitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "altitudeMeters",
+            "columnName": "altitude_meters",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "mslAltitudeMeters",
+            "columnName": "msl_altitude_meters",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "accuracyMeters",
+            "columnName": "accuracy_meters",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "speedMetersPerSecond",
+            "columnName": "speed_mps",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "bearingDegrees",
+            "columnName": "bearing_degrees",
+            "affinity": "REAL"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_track_points_recording_id",
+            "unique": false,
+            "columnNames": [
+              "recording_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_track_points_recording_id` ON `${TABLE_NAME}` (`recording_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "recordings",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "recording_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "uploads",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`recording_id` INTEGER NOT NULL, `upload_url` TEXT NOT NULL, `host` TEXT NOT NULL, `label` TEXT, `expires_at_millis` INTEGER NOT NULL, `state` TEXT NOT NULL, `attempts` INTEGER NOT NULL, `last_http_status` INTEGER, `finished_at_millis` INTEGER, `route_deleted_at_millis` INTEGER, PRIMARY KEY(`recording_id`), FOREIGN KEY(`recording_id`) REFERENCES `recordings`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "recordingId",
+            "columnName": "recording_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "uploadUrl",
+            "columnName": "upload_url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "host",
+            "columnName": "host",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "label",
+            "columnName": "label",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "expiresAtMillis",
+            "columnName": "expires_at_millis",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "attempts",
+            "columnName": "attempts",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastHttpStatus",
+            "columnName": "last_http_status",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "finishedAtMillis",
+            "columnName": "finished_at_millis",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "routeDeletedAtMillis",
+            "columnName": "route_deleted_at_millis",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "recording_id"
+          ]
+        },
+        "foreignKeys": [
+          {
+            "table": "recordings",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "recording_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "grants",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`token_hash` TEXT NOT NULL, `recording_id` INTEGER, `expires_at_millis` INTEGER NOT NULL, PRIMARY KEY(`token_hash`), FOREIGN KEY(`recording_id`) REFERENCES `recordings`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )",
+        "fields": [
+          {
+            "fieldPath": "tokenHash",
+            "columnName": "token_hash",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "recordingId",
+            "columnName": "recording_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "expiresAtMillis",
+            "columnName": "expires_at_millis",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "token_hash"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_grants_recording_id",
+            "unique": false,
+            "columnNames": [
+              "recording_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_grants_recording_id` ON `${TABLE_NAME}` (`recording_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "recordings",
+            "onDelete": "SET NULL",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "recording_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1939628efddd03af3c918902c6559d7e')"
+    ]
+  }
+}

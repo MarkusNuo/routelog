@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Merged into the app that hosts the library (the routelog app or another one). Everything
+     here is what recording and uploading need; the host adds its own UI. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Precise location from the device's GPS. COARSE must be requested together with FINE
+         from Android 12 on, otherwise the system may ignore the request. Background location is
+         never needed: recording runs as a location foreground service that the user starts from
+         the visible app. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- To report a recording that a device restart interrupted, and for the upload jobs:
+         JobInfo.Builder.setPersisted (jobs that survive a restart) needs this permission, and
+         without it the job could not be scheduled. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Upload of a route to the server the host app (or the user, for a link) gave.
+         ACCESS_NETWORK_STATE lets JobScheduler wait for a network before it tries. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application>
+        <!-- Continues an interrupted recording when its notice is tapped, in a host app that has no
+             resume screen of its own (RoutelogConfig.resumeIntent). Not exported: only the
+             library's own notification can start it. -->
+        <activity
+            android:name="io.github.markusnuo.routelog.recording.RoutelogResumeActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <service
+            android:name="io.github.markusnuo.routelog.recording.RecordingService"
+            android:exported="false"
+            android:foregroundServiceType="location" />
+
+        <service
+            android:name="io.github.markusnuo.routelog.upload.UploadJobService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <receiver
+            android:name="io.github.markusnuo.routelog.recording.InterruptionReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Its own class and authority: the host app may have a FileProvider of its own
+             (Capacitor does), and the manifest merger matches providers by class name. -->
+        <provider
+            android:name="io.github.markusnuo.routelog.export.RoutelogFileProvider"
+            android:authorities="${applicationId}.routelog.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/routelog_file_paths" />
+        </provider>
+    </application>
+</manifest>

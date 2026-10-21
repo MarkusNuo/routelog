@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- GPX files written for the share sheet. -->
+    <cache-path
+        name="routelog_exports"
+        path="routelog_exports/" />
+</paths>

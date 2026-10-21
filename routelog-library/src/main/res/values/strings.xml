@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shown by the library in notifications and GPX files. A host app can override any of them
+     with a string of the same name in its own resources (e.g. to translate them). -->
+<resources>
+    <string name="routelog_channel_recording_name">Recording</string>
+    <string name="routelog_channel_recording_description">Shown while a route is being recorded.</string>
+    <string name="routelog_channel_interruptions_name">Interrupted recordings</string>
+    <string name="routelog_channel_interruptions_description">Shown when a recording stopped unexpectedly.</string>
+    <string name="routelog_channel_uploads_name">Upload problems</string>
+    <string name="routelog_channel_uploads_description">Shown when a route could not be uploaded.</string>
+    <string name="routelog_notification_recording_title">Recording route</string>
+    <string name="routelog_notification_recording_text">%1$s · %2$s</string>
+    <string name="routelog_notification_action_stop">Stop</string>
+    <string name="routelog_notification_interrupted_title">Recording interrupted</string>
+    <string name="routelog_notification_interrupted_text">Tap to continue the recording from %1$s.</string>
+    <string name="routelog_notification_upload_expired_title">Upload expired</string>
+    <string name="routelog_notification_upload_expired_text">The route wasn\'t uploaded to %1$s in time. It stays on this phone; you can export it as GPX.</string>
+    <string name="routelog_notification_upload_rejected_title">Upload refused</string>
+    <string name="routelog_notification_upload_rejected_text">%1$s refused the upload (%2$d). The route stays on this phone; you can export it as GPX.</string>
+    <string name="routelog_notification_upload_failed_title">Upload failed</string>
+    <string name="routelog_notification_upload_failed_text">%1$s couldn\'t take the route (%2$d). The route stays on this phone; you can export it as GPX.</string>
+    <string name="routelog_notification_upload_empty_title">Nothing uploaded</string>
+    <string name="routelog_notification_upload_empty_text">No GPS points were recorded, so nothing was sent to %1$s.</string>
+    <string name="routelog_notification_upload_no_grant_title">Upload not possible</string>
+    <string name="routelog_notification_upload_no_grant_text">This phone can\'t upload the route to %1$s (for example after restoring from a backup). It stays here; you can export it as GPX.</string>
+    <string name="routelog_gpx_track_name">routelog %1$s</string>
+    <string name="routelog_distance_km">%1$.1f km</string>
+    <string name="routelog_status_starting">Starting…</string>
+    <string name="routelog_storage_error">Points can\'t be saved. Check free storage.</string>
+    <string name="routelog_gps_off">Location is turned off</string>
+    <string name="routelog_gps_searching">Waiting for GPS signal</string>
+    <string name="routelog_gps_fix">GPS signal OK</string>
+</resources>
