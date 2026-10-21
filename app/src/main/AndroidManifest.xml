@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Location, foreground service, notifications, boot and network permissions come with the
+         library (routelog-library/src/main/AndroidManifest.xml). -->
+    <!-- Ask once to be exempt from battery optimisation, which on some phones ends a recording
+         without notice. -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <!-- Recording runs as a location foreground service started by the user from the visible
+         app, which keeps location access with the screen off. Background location is never
+         requested; make sure no library merges it in. -->
+    <uses-permission
+        android:name="android.permission.ACCESS_BACKGROUND_LOCATION"
+        tools:node="remove" />
+
+    <application
+        android:name=".RoutelogApp"
+        android:allowBackup="true"
+        android:backupAgent=".backup.RoutelogBackupAgent"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:fullBackupOnly="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Routelog">
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- "Record and upload" links (docs/EXTERNAL_RECORDING.md). Treated as untrusted input:
+                 validated, and confirmed by the user unless the host is trusted. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="record"
+                    android:scheme="routelog" />
+            </intent-filter>
+        </activity>
+
+        <!-- Target of the "recording interrupted" notification. MainActivity is exported (it is the
+             launcher), so any app could send it the resume action. Only intents that arrive through
+             this alias are accepted as resume requests, and other apps can't start the alias. -->
+        <activity-alias
+            android:name=".ui.ResumeRecordingAlias"
+            android:exported="false"
+            android:targetActivity=".ui.MainActivity" />
+
+    </application>
+</manifest>

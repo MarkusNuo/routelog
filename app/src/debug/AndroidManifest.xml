@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- Debug builds only: from Android 17 on, uploads to a development PC in the local network
+         need this runtime permission. Release builds upload to public servers. -->
+    <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
+
+    <application android:networkSecurityConfig="@xml/network_security_config">
+        <!-- Empty host for Compose UI tests (ui-test-manifest). The tests run in this app's own
+             process, so no other app needs to start it. -->
+        <activity
+            android:name="androidx.activity.ComponentActivity"
+            android:exported="false"
+            tools:replace="android:exported" />
+    </application>
+</manifest>

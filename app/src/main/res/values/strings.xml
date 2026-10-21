@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">routelog</string>
+
+    <!-- Recorder card -->
+    <string name="status_idle">Not recording</string>
+    <string name="status_starting">Starting…</string>
+    <string name="status_recording">Recording</string>
+    <string name="action_start_recording">Start recording</string>
+    <string name="action_stop_recording">Stop recording</string>
+    <string name="distance_km">%1$.1f km</string>
+    <plurals name="point_count">
+        <item quantity="one">%1$d point</item>
+        <item quantity="other">%1$d points</item>
+    </plurals>
+    <string name="gps_searching">Waiting for GPS signal</string>
+    <string name="gps_off">Location is turned off</string>
+    <string name="gps_accuracy">GPS accuracy ±%1$d m</string>
+    <string name="gps_fix">GPS signal OK</string>
+    <string name="storage_error">Points can\'t be saved. Check free storage.</string>
+    <string name="start_failed">Recording could not be started.</string>
+    <string name="resume_failed">This recording can\'t be resumed.</string>
+
+    <!-- Recordings list -->
+    <string name="recordings_title">Recordings</string>
+    <string name="recordings_empty">No recordings yet.</string>
+    <string name="recording_state_recording">Recording…</string>
+    <string name="recording_state_interrupted">Interrupted</string>
+    <string name="recording_summary">%1$s · %2$s</string>
+    <string name="duration_hours_minutes">%1$d h %2$02d min</string>
+    <string name="duration_minutes_seconds">%1$d min %2$02d s</string>
+    <string name="duration_seconds">%1$d s</string>
+    <string name="action_resume">Resume</string>
+    <string name="action_export">Export GPX</string>
+    <string name="action_delete">Delete</string>
+    <string name="export_chooser_title">Share GPX file</string>
+    <string name="export_failed">The GPX file could not be created.</string>
+
+    <!-- Delete -->
+    <string name="delete_title">Delete recording?</string>
+    <string name="delete_message">The recording from %1$s will be deleted from this device. This can\'t be undone.</string>
+
+    <!-- Common -->
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="action_open_settings">Open settings</string>
+    <string name="action_try_again">Try again</string>
+    <string name="menu_more">More options</string>
+    <string name="menu_backup">Backup</string>
+
+    <!-- Backup -->
+    <string name="backup_title">Back up recordings?</string>
+    <string name="backup_message">routelog can include your recordings in Android backup, so they can be restored on a new phone. Recordings show where you drove.\n\nCloud backup only happens if it is end-to-end encrypted, which needs a screen lock. Moving data directly to a new phone is included.\n\nYou can change this later in the menu. Turning backup off stops future backups, but a backup that already exists may remain until Android replaces it.</string>
+    <string name="backup_state_on">Backup is currently on.</string>
+    <string name="backup_state_off">Backup is currently off.</string>
+    <string name="backup_yes">Back up</string>
+    <string name="backup_no">Don\'t back up</string>
+    <string name="backup_unavailable">Backing up recordings isn\'t available on this Android version. Export recordings as GPX files to keep a copy.</string>
+
+    <!-- Reasons a recording can't start -->
+    <string name="blocker_location_title">Location access needed</string>
+    <string name="blocker_location_message">routelog needs your precise location to record a route.</string>
+    <string name="blocker_location_settings_message">Location access is turned off for routelog. Allow location with \"Use precise location\" in the app settings.</string>
+    <string name="blocker_precise_title">Precise location needed</string>
+    <string name="blocker_precise_message">routelog only has your approximate location, which is not enough to record a route.</string>
+    <string name="blocker_precise_settings_message">routelog only has your approximate location. Turn on \"Use precise location\" in the app settings.</string>
+    <string name="blocker_notifications_title">Notifications needed</string>
+    <string name="blocker_notifications_message">While recording, routelog shows a notification so you can always see that a route is being recorded, also on the lock screen.</string>
+    <string name="blocker_notifications_settings_message">While recording, routelog shows a notification so you can always see that a route is being recorded, also on the lock screen. Allow routelog\'s notifications in the settings.</string>
+    <string name="blocker_gps_off_title">Location is off</string>
+    <string name="blocker_gps_off_message">Turn on location to record a route.</string>
+    <string name="blocker_no_gps_title">No GPS</string>
+    <string name="blocker_no_gps_message">This device has no GPS receiver, so routelog can\'t record a route.</string>
+
+    <!-- Recordings started from a link, and their upload -->
+    <string name="action_finish_upload">Finish &amp; upload</string>
+    <string name="finish_failed">This recording can\'t be finished anymore.</string>
+    <string name="upload_waiting">Uploads to %1$s after you stop</string>
+    <string name="upload_waiting_interrupted">Uploads to %1$s once you finish it</string>
+    <string name="upload_pending">Waiting to upload to %1$s</string>
+    <string name="upload_done">Uploaded to %1$s</string>
+    <string name="upload_expired">Upload to %1$s expired</string>
+    <string name="upload_rejected">%1$s refused the upload (%2$d)</string>
+    <string name="upload_failed">Upload to %1$s failed (%2$d)</string>
+    <string name="upload_nothing">No GPS points, nothing uploaded</string>
+    <string name="upload_no_grant">Can\'t be uploaded from this phone</string>
+    <string name="upload_route_removed">Route removed from this phone</string>
+
+    <string name="link_title">Record and upload?</string>
+    <string name="link_upload_to">After you stop, the route will be uploaded to</string>
+    <string name="link_label">For: %1$s</string>
+    <string name="link_expires">Upload allowed until %1$s.</string>
+    <string name="link_insecure_warning">Unencrypted connection (debug build only). Anyone on the network can read the route.</string>
+    <string name="link_trust">Always allow %1$s and its subdomains</string>
+    <string name="link_record">Record</string>
+    <string name="link_invalid">This link can\'t be used for recording.</string>
+    <string name="link_expired">This link has expired. Ask for a new one.</string>
+    <string name="link_insecure_rejected">This link would upload without encryption. Only https links are accepted.</string>
+    <string name="link_busy">A recording is already running. Stop it before starting another one.</string>
+    <string name="link_trusted_started">Recording for %1$s</string>
+    <string name="link_trusted_started_label">Recording for %1$s: %2$s</string>
+    <string name="link_already_used">This link was already used. Ask for a new one.</string>
+
+    <string name="menu_retention">After upload</string>
+    <string name="menu_trusted_hosts">Trusted servers</string>
+    <string name="close">Close</string>
+    <string name="retention_title">After a recording is uploaded</string>
+    <string name="retention_delete_right_away">Delete it right away</string>
+    <string name="retention_keep_7_days">Keep it for 7 days</string>
+    <string name="retention_keep_30_days">Keep it for 30 days</string>
+    <string name="retention_keep">Keep it until I delete it</string>
+    <string name="retention_note">Only for recordings started from a link. Only the route is deleted; the entry with date, duration and distance stays in the list until you delete it. A shorter time also applies to recordings uploaded before.</string>
+    <string name="trusted_title">Trusted servers</string>
+    <string name="trusted_message">Links to these servers and their subdomains start recording without asking.</string>
+    <string name="trusted_empty">No trusted servers.</string>
+    <string name="trusted_remove">Remove</string>
+
+    <!-- Resume window, battery optimisation, local network access -->
+    <string name="resume_too_late">This recording was interrupted more than 12 hours ago and can\'t be continued.</string>
+    <string name="battery_hint">On some phones, battery optimization can stop a recording without notice. Allow routelog to run without it.</string>
+    <string name="battery_allow">Allow</string>
+    <string name="battery_hide">Hide</string>
+    <string name="blocker_local_network_title">Local network access needed</string>
+    <string name="blocker_local_network_message">This link uploads to a computer in your local network (debug build). Android needs your permission for that.</string>
+    <string name="blocker_local_network_settings_message">This link uploads to a computer in your local network (debug build). Allow routelog to use devices nearby in the app settings.</string>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A winding route from a start dot to an end ring, inside the 66dp safe zone. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:pathData="M36,72 C36,58 50,60 54,52 C58,44 48,38 56,32 C62,28 70,32 72,36"
+        android:strokeWidth="5"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36,72m-6,0a6,6 0,1 1,12 0a6,6 0,1 1,-12 0" />
+    <path
+        android:pathData="M72,36m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0"
+        android:strokeWidth="3"
+        android:strokeColor="#FFFFFF" />
+</vector>

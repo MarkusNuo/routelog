@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Debug builds only: http:// upload targets, e.g. the development PC in the
+     local network. Release builds keep Android's default, which refuses cleartext traffic. -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

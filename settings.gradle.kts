@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "routelog"
+include(":app")
 include(":routelog-library")

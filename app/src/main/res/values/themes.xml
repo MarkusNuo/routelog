@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Colours and typography come from Compose; this theme only covers the window before the
+         first frame. -->
+    <style name="Theme.Routelog" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>

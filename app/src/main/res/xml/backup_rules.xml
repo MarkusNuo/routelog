@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 11 and older. Which files may be backed up at all; whether a backup happens is
+     decided at runtime by RoutelogBackupAgent (user consent, encryption). The upload tokens
+     (TokenStore) are never part of a backup: a token stays on the phone it was given to. They now
+     live under noBackupFilesDir, which Android never backs up; upload_tokens.xml is the file older
+     versions wrote, left out for phones that were not migrated yet. The same goes for the battery
+     exemption flags (BatteryOptimization): the exemption is per phone. -->
+<full-backup-content>
+    <include
+        domain="database"
+        path="." />
+    <include
+        domain="sharedpref"
+        path="." />
+    <exclude
+        domain="sharedpref"
+        path="upload_tokens.xml" />
+    <exclude
+        domain="sharedpref"
+        path="device_state.xml" />
+</full-backup-content>
