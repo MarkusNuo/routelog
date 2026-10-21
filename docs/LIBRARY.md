@@ -378,8 +378,7 @@ Git tag (`routelog-library-<version>`). The host does **not** build the sources.
 `includeBuild` it would have to use exactly the same Android Gradle plugin version as routelog; in a test,
 the build failed with AGP 9.3.0 and Gradle 8.
 
-1. **Add the submodule**, in the host's Android project (e.g. `android/` of a Capacitor app). The repository
-   is private; read access is enough:
+1. **Add the submodule**, in the host's Android project (e.g. `android/` of a Capacitor app):
    ```
    git submodule add https://github.com/MarkusNuo/routelog.git routelog
    git -C routelog checkout routelog-library-1.0.0
@@ -388,12 +387,20 @@ the build failed with AGP 9.3.0 and Gradle 8.
    ```
    `git add routelog` and the commit pin the checked state: the host repository then records exactly this
    commit of the submodule (the tag alone is not in the host repository).
+
+   Before you push the host's commit, check that the submodule commit is the commit of the tag:
+   ```
+   git -C routelog rev-parse HEAD
+   git ls-remote https://github.com/MarkusNuo/routelog.git 'refs/tags/routelog-library-1.0.0^{}'
+   ```
+   Both must print the same commit. The address in `.gitmodules` alone does not prove where a commit comes
+   from: GitHub also serves commits of forks through it. Do this also when reviewing a change of the submodule
+   pointer (e.g. in a pull request).
    - **New clones** of the host repository: `git clone --recurse-submodules <address>`, or
      `git submodule update --init` in a repository that is already cloned. Without it, `routelog/` is empty
      and the build does not find the library.
-   - **CI** needs read access to the private routelog repository: a deploy key or a fine-grained token with
-     read access to this repository. The default token of GitHub Actions (`GITHUB_TOKEN`) cannot read
-     another private repository.
+   - **CI** has to check out the submodule too, e.g. `actions/checkout` with `submodules: true` on GitHub
+     Actions.
 2. **Add the Maven repository**, in the host's `settings.gradle(.kts)`:
    ```kotlin
    dependencyResolutionManagement {
@@ -434,14 +441,23 @@ the build failed with AGP 9.3.0 and Gradle 8.
    sha256sum routelog/maven-repo/io/github/markusnuo/routelog-library/1.0.0/routelog-library-1.0.0.module
    ```
    (PowerShell: `Get-FileHash -Algorithm SHA256 <file>`.) The values must match the tag message. This
-   protects against a damaged or wrong copy, not against someone with write access to the routelog
-   repository who changes the tag and the files at the same time. Against that, these help:
+   protects against a damaged or wrong copy, not against a commit from a fork or against someone with write
+   access to the routelog repository who changes the tag and the files at the same time. Against that, these
+   help:
    - the submodule pointer from step 1: the host builds only the commit it has checked;
-   - **Gradle dependency verification** in the host (`gradle/verification-metadata.xml`, created with
-     `./gradlew --write-verification-metadata sha256 :app:assembleDebug`): Gradle then checks the checksums
-     of all dependencies on every build, including those of the library from `maven-repo/`. Recommended;
-   - protecting the tags `routelog-library-*` in the GitHub repository so that nobody can move or delete them
-     (a GitHub ruleset for tags). This is a setting of the routelog repository, not of the host.
+   - the check from step 1 that the submodule commit is the commit of the tag (`git ls-remote`), also when a
+     change of the pointer is reviewed;
+   - **Gradle dependency verification** in the host (`gradle/verification-metadata.xml`, created with, for
+     example, `./gradlew --write-verification-metadata sha256 :app:assembleDebug :app:assembleRelease`; the
+     host adapts the tasks so that they resolve the configurations its CI builds): Gradle then checks the
+     checksums of all dependencies on every build, including those of the library from `maven-repo/`.
+     After generating the file, compare the sha256 values recorded for `routelog-library-<version>.aar` and
+     `.module` with the tag message. On every update, review the diff of `verification-metadata.xml`
+     together with the change of the submodule pointer. Recommended;
+   - tag protection in the routelog repository (a GitHub ruleset for `routelog-library-*` that blocks moving
+     and deleting tags), once it is set up there. A repository admin can still change a ruleset, so it
+     guards against mistakes, not against a compromised owner account. This is a setting of the routelog
+     repository, not of the host.
 5. **Before the first build**, read and apply these sections:
    - [Backup rules (required for the host)](#backup-rules-required-for-the-host), including the exclusions
      for device transfer (`<device-transfer>`): otherwise routes end up in the backup.
@@ -455,9 +471,17 @@ the build failed with AGP 9.3.0 and Gradle 8.
 
 1. `git -C routelog fetch --tags`
 2. `git -C routelog checkout routelog-library-<new version>`
-3. Check the integrity (step 4).
-4. Change the version number from step 3 and commit it together with `git add routelog` in **one** commit:
-   the pointer and the version belong together.
+3. Check that the commit is the commit of the tag, as in step 1 above:
+   ```
+   git -C routelog rev-parse HEAD
+   git ls-remote https://github.com/MarkusNuo/routelog.git 'refs/tags/routelog-library-<new version>^{}'
+   ```
+   Both must print the same commit.
+4. Check the integrity, as in step 4 above.
+5. Change the version number from step 3 above and commit it together with `git add routelog` in **one**
+   commit: the pointer and the version belong together. If the host uses dependency verification, include
+   the updated `gradle/verification-metadata.xml` and review its diff together with the pointer (step 4
+   above).
 
 Tested in the emulator with a minimal test host (debug build, AGP 9.3.0, Kotlin 2.2, `http` to 127.0.0.1,
 Android 16 and 17):
