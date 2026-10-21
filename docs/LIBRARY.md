@@ -454,10 +454,9 @@ the build failed with AGP 9.3.0 and Gradle 8.
      After generating the file, compare the sha256 values recorded for `routelog-library-<version>.aar` and
      `.module` with the tag message. On every update, review the diff of `verification-metadata.xml`
      together with the change of the submodule pointer. Recommended;
-   - tag protection in the routelog repository (a GitHub ruleset for `routelog-library-*` that blocks moving
-     and deleting tags), once it is set up there. A repository admin can still change a ruleset, so it
-     guards against mistakes, not against a compromised owner account. This is a setting of the routelog
-     repository, not of the host.
+   - tag protection in the routelog repository: a GitHub ruleset for `routelog-library-*` blocks moving and
+     deleting tags. A repository admin can still change a ruleset, so it guards against mistakes, not against
+     a compromised owner account. This is a setting of the routelog repository, not of the host.
 5. **Before the first build**, read and apply these sections:
    - [Backup rules (required for the host)](#backup-rules-required-for-the-host), including the exclusions
      for device transfer (`<device-transfer>`): otherwise routes end up in the backup.
