@@ -124,5 +124,6 @@ Copyright (C) 2026 MarkusNuo
 - **Name and logo** are not covered by this license; your own version needs its own name.
 - **Other terms**, e.g. a commercial license, are available from the author (GitHub: @MarkusNuo).
 - **Third-party parts** keep their own licenses: the Gradle wrapper (`gradlew`, `gradlew.bat`,
-  `gradle/wrapper/`, Apache License 2.0), the Material icon `ic_more_vert` (Apache License 2.0) and the
-  libraries listed in `gradle/libs.versions.toml`.
+  `gradle/wrapper/`, Apache License 2.0), the Material icon `ic_more_vert` (Apache License 2.0), the GPX 1.1
+  schema by TopoGrafix that the tests validate against (`routelog-library/src/test/resources/gpx/gpx-1.1.xsd`)
+  and the libraries listed in `gradle/libs.versions.toml`.
