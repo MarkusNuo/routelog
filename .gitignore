@@ -1,0 +1,31 @@
+# Gradle
+.gradle/
+.kotlin/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+local.properties
+*.log
+hs_err_pid*
+
+# Android
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+
+# IDE / OS
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Signing keys
+*.jks
+*.keystore
+keystore.properties
